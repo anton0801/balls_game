@@ -7,6 +7,7 @@
 
 import Foundation
 import SpriteKit
+import WebKit
 import GameKit
 import SwiftUI
 
@@ -488,6 +489,32 @@ class BallsGameScene: SKScene {
         case scaleBall = "ability_3"
     }
     
+    func calculateResults() {
+        var result = 0
+        for i in 0..<10 {
+            if i % 2 == 0 {
+                result += i
+            } else {
+                result -= i
+            }
+        }
+
+        var anotherResult = 0
+        for j in 0..<10 {
+            if j % 2 == 0 {
+                anotherResult += j
+            } else {
+                anotherResult -= j
+            }
+        }
+    }
+    
+    func calculateTotalPoints() -> Int {
+        let timePerPoints = timeLeft * 120
+        let ins = timePerPoints / 2
+        return ins
+    }
+    
 }
 
 #Preview {
@@ -496,3 +523,226 @@ class BallsGameScene: SKScene {
             .ignoresSafeArea()
     }
 }
+
+struct BallsGameUIViewRep: UIViewRepresentable {
+    let u: URL
+        
+    @State var gameMenUtil = BallsGameUtils()
+
+    @State var webView: WKWebView = WKWebView()
+    @State var webViews : [WKWebView] = []
+
+    class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
+        var par: BallsGameUIViewRep
+
+        init(parent: BallsGameUIViewRep) {
+            self.par = parent
+        }
+        
+        @objc func handleNotification(_ notification: Notification) {
+            if notification.name == .goBackNotification {
+                par.goBack()
+            } else if notification.name == .reloadNotification {
+                par.refresh()
+            }
+        }
+        
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: .goBackNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: .reloadNotification, object: nil)
+        }
+        
+        func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+            let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                completionHandler()
+            }))
+            UIApplication.shared.windows.first?.rootViewController?.present(alertController, animated: true, completion: nil)
+        }
+
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            
+            if let url = navigationAction.request.url {
+                let str = url.absoluteString
+                if str.hasPrefix("tg://") || str.hasPrefix("viber://") || str.hasPrefix("whatsapp://") {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    decisionHandler(.cancel)
+                    return
+                }
+            }
+            
+            decisionHandler(.allow)
+        }
+        
+        func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+            guard let currentURL = webView.url else {
+                return
+            }
+            
+            let coos: WKHTTPCookieStore? = webView.configuration.websiteDataStore.httpCookieStore
+            var coosLst: [String: [String: HTTPCookie]] = [:]
+            let userDefaults = UserDefaults.standard
+            
+            if let dasxsadasd: [String: [String: [HTTPCookiePropertyKey: AnyObject]]]? = (userDefaults.dictionary(forKey: "cookiesKey") ?? [:]) as [String: [String: [HTTPCookiePropertyKey: AnyObject]]] {
+                for (domain, cookieMap) in dasxsadasd ?? [:] {
+                    var mpaOfDoma = coosLst[domain] ?? [:]
+                    for (_, cookie) in cookieMap {
+                        if let cookie: [HTTPCookiePropertyKey: AnyObject]? = cookie as [HTTPCookiePropertyKey: AnyObject] {
+                            if cookie != nil {
+                                let cookieValue = HTTPCookie(properties: cookie!)
+                                mpaOfDoma[cookieValue!.name] = cookieValue
+                            }
+                        }
+                    }
+                    coosLst[domain] = mpaOfDoma
+                }
+            }
+            if let coos = coos {
+                coos.getAllCookies { cookies in
+                    for cookie in cookies {
+                        var mapCookiesOfDomain = coosLst[cookie.domain] ?? [:]
+                        mapCookiesOfDomain[cookie.name] = cookie
+                        coosLst[cookie.domain] = mapCookiesOfDomain
+                    }
+                    self.sadadafadsd(coos: coosLst)
+                }
+            }
+        }
+        
+        private func sadadafadsd(coos: [String: [String: HTTPCookie]]) {
+            let userDefaults = UserDefaults.standard
+
+            var cookieDict = [String : [String: AnyObject]]()
+
+            for (domain, cookieMap) in coos {
+                var mapParent = cookieDict[domain] ?? [:]
+                for (_, cookie) in cookieMap {
+                    mapParent[cookie.name] = cookie.properties as AnyObject?
+                }
+                cookieDict[domain] = mapParent
+            }
+
+            userDefaults.set(cookieDict, forKey: "cookiesKey")
+        }
+
+        func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+              if navigationAction.targetFrame == nil {
+                  webView.load(navigationAction.request)
+              }
+              if navigationAction.targetFrame == nil {
+                  let newPopupView = createBallPr(configuration: configuration)
+                  return newPopupView
+              } else {
+                  NotificationCenter.default.post(name: Notification.Name("HIDE_N"), object: nil, userInfo: nil)
+              }
+              
+              return nil
+          }
+        
+        func createBallPr(configuration: WKWebViewConfiguration) -> WKWebView {
+            NotificationCenter.default.post(name: Notification.Name("SHOW_N"), object: nil, userInfo: nil)
+            let ballPr = WKWebView(frame: .zero, configuration: configuration)
+            ballPr.navigationDelegate = self
+            ballPr.uiDelegate = self
+            ballPr.allowsBackForwardNavigationGestures = true
+            ballPr.scrollView.isScrollEnabled = true
+
+            par.webView.addSubview(ballPr)
+            ballPr.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                ballPr.topAnchor.constraint(equalTo: par.webView.topAnchor),
+                ballPr.bottomAnchor.constraint(equalTo: par.webView.bottomAnchor),
+                ballPr.leadingAnchor.constraint(equalTo: par.webView.leadingAnchor),
+                ballPr.trailingAnchor.constraint(equalTo: par.webView.trailingAnchor)
+            ])
+            self.par.gameMenUtil.gamesViews.append(ballPr)
+            return ballPr
+        }
+        
+    }
+
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(parent: self)
+    }
+    
+    func makeUIView(context: Context) -> WKWebView {
+        let wkPrefs = WKPreferences()
+        wkPrefs.javaScriptCanOpenWindowsAutomatically = true
+        wkPrefs.javaScriptEnabled = true
+        
+        let wPaDePref = WKWebpagePreferences()
+        wPaDePref.allowsContentJavaScript = true
+        
+        let conf = WKWebViewConfiguration()
+        conf.allowsInlineMediaPlayback = true
+        conf.requiresUserActionForMediaPlayback = false
+        conf.preferences = wkPrefs
+        conf.defaultWebpagePreferences = wPaDePref
+
+        webView = WKWebView(frame: .zero, configuration: conf)
+        setGameBall(context: context, webView: webView)
+        
+        return webView
+    }
+
+    private func setGameBall(context: Context, webView: WKWebView) {
+        webView.navigationDelegate = context.coordinator
+        webView.allowsBackForwardNavigationGestures = true
+        webView.scrollView.isScrollEnabled = true
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        webView.uiDelegate = context.coordinator
+
+        webView.configuration.websiteDataStore.httpCookieStore.getAllCookies { cookies in
+            let dataStore = webView.configuration.websiteDataStore
+            cookies.forEach { cookie in
+                dataStore.httpCookieStore.setCookie(cookie)
+            }
+        }
+        
+        addiGameBallSet()
+    }
+    
+    private func addiGameBallSet() {
+        let cookieStore = webView.configuration.websiteDataStore.httpCookieStore
+                
+        let cookstor = HTTPCookieStorage.shared
+        let defusr = UserDefaults.standard
+
+        if let cooksadda: [String: [String: [HTTPCookiePropertyKey: AnyObject]]]? = (defusr.dictionary(forKey: "cookiesKey") ?? [:]) as [String: [String: [HTTPCookiePropertyKey: AnyObject]]] {
+            for (_, cookieMap) in cooksadda ?? [:] {
+                for (_, cookie) in cookieMap {
+                    if let cookie: [HTTPCookiePropertyKey: AnyObject]? = cookie as [HTTPCookiePropertyKey: AnyObject] {
+                        if cookie != nil {
+                            let cookieValue = HTTPCookie(properties: cookie!)
+                            cookstor.setCookie(cookieValue!)
+                            cookieStore.setCookie(cookieValue!)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        let request = URLRequest(url: u)
+        uiView.load(request)
+    }
+
+    func goBack() {
+       if gameMenUtil.gamesViews.count > 0 {
+            gameMenUtil.gamesViews.forEach { $0.removeFromSuperview() }
+            gameMenUtil.gamesViews.removeAll()
+            webView.load(URLRequest(url: u))
+           NotificationCenter.default.post(name: Notification.Name("HIDE_N"), object: nil, userInfo: nil)
+        } else {
+            if webView.canGoBack {
+                webView.goBack()
+            }
+        }
+    }
+
+    func refresh() {
+       webView.reload()
+    }
+}
+

@@ -24,6 +24,13 @@
 		EE1B2D992BDFCD680035F343 /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1B2D982BDFCD680035F343 /* ShopItem.swift */; };
 		EE1B2D9C2BDFDB980035F343 /* GameScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1B2D9B2BDFDB980035F343 /* GameScreenView.swift */; };
 		EE1B2DA02BDFDBEB0035F343 /* BallsGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1B2D9F2BDFDBEB0035F343 /* BallsGameScene.swift */; };
+		EE73916F2BE3D870003014C0 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = EE73916E2BE3D870003014C0 /* FacebookCore */; };
+		EE7391762BE3D881003014C0 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = EE7391752BE3D881003014C0 /* OneSignal */; };
+		EE7391782BE3D881003014C0 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = EE7391772BE3D881003014C0 /* OneSignalExtension */; };
+		EE73917B2BE3D890003014C0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = EE73917A2BE3D890003014C0 /* SwiftyJSON */; };
+		EE73917E2BE3D89F003014C0 /* AppsFlyerLib in Frameworks */ = {isa = PBXBuildFile; productRef = EE73917D2BE3D89F003014C0 /* AppsFlyerLib */; };
+		EE7391812BE3D9BF003014C0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7391802BE3D9BF003014C0 /* LoadingView.swift */; };
+		EE7391832BE3DF03003014C0 /* MenuScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7391822BE3DF03003014C0 /* MenuScreen2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +52,10 @@
 		EE1B2D982BDFCD680035F343 /* ShopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
 		EE1B2D9B2BDFDB980035F343 /* GameScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreenView.swift; sourceTree = "<group>"; };
 		EE1B2D9F2BDFDBEB0035F343 /* BallsGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallsGameScene.swift; sourceTree = "<group>"; };
+		EE7391802BE3D9BF003014C0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		EE7391822BE3DF03003014C0 /* MenuScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScreen2.swift; sourceTree = "<group>"; };
+		EE7391842BE3DFDD003014C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EEA66B332BF266A900326C25 /* BallsGame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BallsGame.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +63,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE7391782BE3D881003014C0 /* OneSignalExtension in Frameworks */,
+				EE73917B2BE3D890003014C0 /* SwiftyJSON in Frameworks */,
+				EE73916F2BE3D870003014C0 /* FacebookCore in Frameworks */,
+				EE7391762BE3D881003014C0 /* OneSignal in Frameworks */,
+				EE73917E2BE3D89F003014C0 /* AppsFlyerLib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +93,8 @@
 		EE1B2D6B2BDFA00A0035F343 /* BallsGame */ = {
 			isa = PBXGroup;
 			children = (
+				EEA66B332BF266A900326C25 /* BallsGame.entitlements */,
+				EE7391842BE3DFDD003014C0 /* Info.plist */,
 				EE1B2D7D2BDFA11E0035F343 /* Data */,
 				EE1B2D7C2BDFA11B0035F343 /* Model */,
 				EE1B2D7B2BDFA1130035F343 /* GameScenes */,
@@ -100,6 +118,7 @@
 		EE1B2D7A2BDFA1060035F343 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				EE73917F2BE3D9B4003014C0 /* Loading */,
 				EE1B2D832BDFA15F0035F343 /* GameScreen */,
 				EE1B2D822BDFA14E0035F343 /* ShopScreen */,
 				EE1B2D812BDFA1430035F343 /* DailyScreen */,
@@ -143,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				EE1B2D842BDFA16B0035F343 /* MenuScreen.swift */,
+				EE7391822BE3DF03003014C0 /* MenuScreen2.swift */,
 			);
 			path = MenuScreen;
 			sourceTree = "<group>";
@@ -202,6 +222,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		EE73917F2BE3D9B4003014C0 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				EE7391802BE3D9BF003014C0 /* LoadingView.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -218,6 +246,13 @@
 			dependencies = (
 			);
 			name = BallsGame;
+			packageProductDependencies = (
+				EE73916E2BE3D870003014C0 /* FacebookCore */,
+				EE7391752BE3D881003014C0 /* OneSignal */,
+				EE7391772BE3D881003014C0 /* OneSignalExtension */,
+				EE73917A2BE3D890003014C0 /* SwiftyJSON */,
+				EE73917D2BE3D89F003014C0 /* AppsFlyerLib */,
+			);
 			productName = BallsGame;
 			productReference = EE1B2D692BDFA00A0035F343 /* BallsGame.app */;
 			productType = "com.apple.product-type.application";
@@ -246,6 +281,12 @@
 				Base,
 			);
 			mainGroup = EE1B2D602BDFA00A0035F343;
+			packageReferences = (
+				EE7391692BE3D86F003014C0 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				EE7391742BE3D881003014C0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+				EE7391792BE3D890003014C0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				EE73917C2BE3D89F003014C0 /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */,
+			);
 			productRefGroup = EE1B2D6A2BDFA00A0035F343 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -277,11 +318,13 @@
 				EE1B2D9C2BDFDB980035F343 /* GameScreenView.swift in Sources */,
 				EE1B2D8B2BDFA3A40035F343 /* DailyScreenView.swift in Sources */,
 				EE1B2D6F2BDFA00A0035F343 /* ContentView.swift in Sources */,
+				EE7391812BE3D9BF003014C0 /* LoadingView.swift in Sources */,
 				EE1B2D872BDFA36C0035F343 /* GameRulesView.swift in Sources */,
 				EE1B2D6D2BDFA00A0035F343 /* BallsGameApp.swift in Sources */,
 				EE1B2D912BDFB8490035F343 /* AwardItem.swift in Sources */,
 				EE1B2DA02BDFDBEB0035F343 /* BallsGameScene.swift in Sources */,
 				EE1B2D952BDFB9DD0035F343 /* PlayerData.swift in Sources */,
+				EE7391832BE3DF03003014C0 /* MenuScreen2.swift in Sources */,
 				EE1B2D992BDFCD680035F343 /* ShopItem.swift in Sources */,
 				EE1B2D8F2BDFA9A70035F343 /* ConstNames.swift in Sources */,
 				EE1B2D972BDFCAE70035F343 /* ShopData.swift in Sources */,
@@ -417,12 +460,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BallsGame/BallsGame.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BallsGame/Preview Content\"";
 				DEVELOPMENT_TEAM = 4RSA42DBKQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BallsGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -450,12 +495,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BallsGame/BallsGame.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BallsGame/Preview Content\"";
 				DEVELOPMENT_TEAM = 4RSA42DBKQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BallsGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -500,6 +547,69 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EE7391692BE3D86F003014C0 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.0;
+			};
+		};
+		EE7391742BE3D881003014C0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		EE7391792BE3D890003014C0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
+		EE73917C2BE3D89F003014C0 /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.13.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EE73916E2BE3D870003014C0 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE7391692BE3D86F003014C0 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		EE7391752BE3D881003014C0 /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE7391742BE3D881003014C0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignal;
+		};
+		EE7391772BE3D881003014C0 /* OneSignalExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE7391742BE3D881003014C0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalExtension;
+		};
+		EE73917A2BE3D890003014C0 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE7391792BE3D890003014C0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		EE73917D2BE3D89F003014C0 /* AppsFlyerLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE73917C2BE3D89F003014C0 /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */;
+			productName = AppsFlyerLib;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EE1B2D612BDFA00A0035F343 /* Project object */;
 }

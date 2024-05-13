@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+    
+    <key>NSUserTrackingUsageDescription</key>
+    <string>Ball Crusher Quest app uses device tracking to personalize ads and improve gameplay. Your data is anonymized and used only to enhance your experience. You can manage tracking preferences in settings. Your privacy is important to us.</string>
+    
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>processing</string>
+        <string>remote-notification</string>
+    </array>
+
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>com.com.flightstuntappgame.FlightStunt.backgroundProccess</string>
+        <string>group.com.flightstuntappgame.FlightStunt.onesignal</string>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb965183255066305</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>965183255066305</string>
+    <key>FacebookClientToken</key>
+    <string>0e34b1df5fbec0a126c0fce8539ba70b</string>
+    <key>FacebookDisplayName</key>
+    <string>Ball Crusher Quest</string>
+    <key>ITSEncryptionExportComplianceCode</key>
+    <string>NO</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+   
+    <key>NSCameraUsageDescription</key>
+    <string>Let this app access camera</string>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>target=&quot;_blank</string>
+        <string>target</string>
+        <string>#</string>
+        <string>target:blank</string>
+        <string>target</string>
+        <string>localhost</string>
+        <string>about:blank</string>
+        <string>about</string>
+        <string>http</string>
+        <string>whatsapp</string>
+        <string>viber</string>
+        <string>tg</string>
+        <string>https</string>
+    </array>
+</dict>
+</plist>

@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        MenuScreen()
+        if UserDefaults.standard.string(forKey: "l_save") != nil {
+            MenuScreen2()
+         } else {
+             MenuScreen()
+         }
     }
 }
 

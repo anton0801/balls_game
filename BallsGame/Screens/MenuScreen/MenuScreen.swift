@@ -83,6 +83,9 @@ struct MenuScreen: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
+    
+    
+    
 }
 
 #Preview {
